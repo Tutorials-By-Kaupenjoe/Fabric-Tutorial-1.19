@@ -12,5 +12,7 @@
   "block.tutorialmod.tanzanite_lamp": "Tanzanite Lamp",
   "block.tutorialmod.eggplant_crop": "Eggplant Crop",
 
-  "itemGroup.tutorialmod.tanzanite": "Tanzanite Tutorial Tab"
+  "itemGroup.tutorialmod.tanzanite": "Tanzanite Tutorial Tab",
+
+  "entity.minecraft.villager.jumpmaster": "Jump Master"
 }
