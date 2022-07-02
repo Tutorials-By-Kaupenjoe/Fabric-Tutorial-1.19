@@ -4,6 +4,7 @@ import net.fabricmc.api.ModInitializer;
 import net.kaupenjoe.tutorialmod.block.ModBlocks;
 import net.kaupenjoe.tutorialmod.item.ModItems;
 import net.kaupenjoe.tutorialmod.painting.ModPaintings;
+import net.kaupenjoe.tutorialmod.util.ModLootTableModifiers;
 import net.kaupenjoe.tutorialmod.villager.ModVillagers;
 import net.kaupenjoe.tutorialmod.world.feature.ModConfiguredFeatures;
 import net.kaupenjoe.tutorialmod.world.gen.ModOreGeneration;
@@ -27,5 +28,7 @@ public class TutorialMod implements ModInitializer {
 
 		ModPaintings.registerPaintings();
 		ModOreGeneration.generateOres();
+
+		ModLootTableModifiers.modifyLootTables();
 	}
 }
