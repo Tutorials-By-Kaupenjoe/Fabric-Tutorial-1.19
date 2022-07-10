@@ -16,5 +16,8 @@
 
   "itemGroup.tutorialmod.tanzanite": "Tanzanite Tutorial Tab",
 
-  "entity.minecraft.villager.jumpmaster": "Jump Master"
+  "entity.minecraft.villager.jumpmaster": "Jump Master",
+
+  "key.category.tutorialmod.tutorial": "Tutorial Mod",
+  "key.tutorialmod.drink_water": "Drink Water Key"
 }
