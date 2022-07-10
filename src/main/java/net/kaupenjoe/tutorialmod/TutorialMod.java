@@ -3,6 +3,7 @@ package net.kaupenjoe.tutorialmod;
 import net.fabricmc.api.ModInitializer;
 import net.kaupenjoe.tutorialmod.block.ModBlocks;
 import net.kaupenjoe.tutorialmod.item.ModItems;
+import net.kaupenjoe.tutorialmod.networking.ModMessages;
 import net.kaupenjoe.tutorialmod.painting.ModPaintings;
 import net.kaupenjoe.tutorialmod.util.ModLootTableModifiers;
 import net.kaupenjoe.tutorialmod.villager.ModVillagers;
@@ -30,5 +31,6 @@ public class TutorialMod implements ModInitializer {
 		ModOreGeneration.generateOres();
 
 		ModLootTableModifiers.modifyLootTables();
+		ModMessages.registerC2SPackets();
 	}
 }
