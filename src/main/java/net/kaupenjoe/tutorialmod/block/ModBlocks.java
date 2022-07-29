@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.kaupenjoe.tutorialmod.TutorialMod;
 import net.kaupenjoe.tutorialmod.block.custom.EggplantCropBlock;
+import net.kaupenjoe.tutorialmod.block.custom.GemInfusingStationBlock;
 import net.kaupenjoe.tutorialmod.block.custom.JumpyBlock;
 import net.kaupenjoe.tutorialmod.block.custom.TanzaniteLampBlock;
 import net.kaupenjoe.tutorialmod.item.ModItemGroup;
@@ -45,6 +46,9 @@ public class ModBlocks {
     public static final Block EGGPLANT_CROP = registerBlockWithoutItem("eggplant_crop",
             new EggplantCropBlock(FabricBlockSettings.copy(Blocks.WHEAT)));
 
+    public static final Block GEM_INFUSING_STATION = registerBlock("gem_infusing_station",
+            new GemInfusingStationBlock(FabricBlockSettings.of(Material.METAL)
+                    .strength(4f).requiresTool().nonOpaque()), ModItemGroup.TANZANITE);
 
 
     private static Block registerBlockWithoutItem(String name, Block block) {
