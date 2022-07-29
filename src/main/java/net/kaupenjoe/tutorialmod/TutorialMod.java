@@ -4,6 +4,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.kaupenjoe.tutorialmod.block.ModBlocks;
 import net.kaupenjoe.tutorialmod.event.PlayerTickHandler;
+import net.kaupenjoe.tutorialmod.fluid.ModFluids;
 import net.kaupenjoe.tutorialmod.item.ModItems;
 import net.kaupenjoe.tutorialmod.networking.ModMessages;
 import net.kaupenjoe.tutorialmod.painting.ModPaintings;
@@ -34,6 +35,8 @@ public class TutorialMod implements ModInitializer {
 
 		ModLootTableModifiers.modifyLootTables();
 		ModMessages.registerC2SPackets();
+
+		ModFluids.register();
 
 		ServerTickEvents.START_SERVER_TICK.register(new PlayerTickHandler());
 	}
