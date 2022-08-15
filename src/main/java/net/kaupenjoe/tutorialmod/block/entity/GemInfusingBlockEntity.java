@@ -111,10 +111,13 @@ public class GemInfusingBlockEntity extends BlockEntity implements NamedScreenHa
             inventory.setStack(i, entity.getStack(i));
         }
 
+        Optional<GemInfusingRecipe> recipe = entity.getWorld().getRecipeManager()
+                .getFirstMatch(GemInfusingRecipe.Type.INSTANCE, inventory, entity.getWorld());
+
         if(hasRecipe(entity)) {
             entity.removeStack(1, 1);
 
-            entity.setStack(2, new ItemStack(ModItems.TANZANITE,
+            entity.setStack(2, new ItemStack(recipe.get().getOutput().getItem(),
                     entity.getStack(2).getCount() + 1));
 
             entity.resetProgress();
