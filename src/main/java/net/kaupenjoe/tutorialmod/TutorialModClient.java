@@ -10,6 +10,9 @@ import net.kaupenjoe.tutorialmod.client.ThirstHudOverlay;
 import net.kaupenjoe.tutorialmod.event.KeyInputHandler;
 import net.kaupenjoe.tutorialmod.fluid.ModFluids;
 import net.kaupenjoe.tutorialmod.networking.ModMessages;
+import net.kaupenjoe.tutorialmod.screen.GemInfusingScreen;
+import net.kaupenjoe.tutorialmod.screen.ModScreenHandlers;
+import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.util.Identifier;
 
@@ -32,5 +35,7 @@ public class TutorialModClient implements ClientModInitializer {
 
         BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(),
                 ModFluids.STILL_SOAP_WATER, ModFluids.FLOWING_SOAP_WATER);
+
+        HandledScreens.register(ModScreenHandlers.GEM_INFUSING_SCREEN_HANDLER, GemInfusingScreen::new);
     }
 }

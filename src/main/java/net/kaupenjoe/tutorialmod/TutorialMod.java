@@ -3,11 +3,13 @@ package net.kaupenjoe.tutorialmod;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.kaupenjoe.tutorialmod.block.ModBlocks;
+import net.kaupenjoe.tutorialmod.block.entity.ModBlockEntities;
 import net.kaupenjoe.tutorialmod.event.PlayerTickHandler;
 import net.kaupenjoe.tutorialmod.fluid.ModFluids;
 import net.kaupenjoe.tutorialmod.item.ModItems;
 import net.kaupenjoe.tutorialmod.networking.ModMessages;
 import net.kaupenjoe.tutorialmod.painting.ModPaintings;
+import net.kaupenjoe.tutorialmod.screen.ModScreenHandlers;
 import net.kaupenjoe.tutorialmod.util.ModLootTableModifiers;
 import net.kaupenjoe.tutorialmod.villager.ModVillagers;
 import net.kaupenjoe.tutorialmod.world.feature.ModConfiguredFeatures;
@@ -37,6 +39,9 @@ public class TutorialMod implements ModInitializer {
 		ModMessages.registerC2SPackets();
 
 		ModFluids.register();
+		ModBlockEntities.registerBlockEntities();
+
+		ModScreenHandlers.registerAllScreenHandlers();
 
 		ServerTickEvents.START_SERVER_TICK.register(new PlayerTickHandler());
 	}
