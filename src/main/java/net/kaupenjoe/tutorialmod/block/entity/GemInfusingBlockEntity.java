@@ -1,6 +1,7 @@
 package net.kaupenjoe.tutorialmod.block.entity;
 
 import net.kaupenjoe.tutorialmod.item.ModItems;
+import net.kaupenjoe.tutorialmod.recipe.GemInfusingRecipe;
 import net.kaupenjoe.tutorialmod.screen.GemInfusingScreenHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -19,6 +20,8 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
 
 public class GemInfusingBlockEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(3, ItemStack.EMPTY);
@@ -124,9 +127,10 @@ public class GemInfusingBlockEntity extends BlockEntity implements NamedScreenHa
             inventory.setStack(i, entity.getStack(i));
         }
 
-        boolean hasRawGemInFirstSlot = entity.getStack(1).getItem() == ModItems.RAW_TANZANITE;
+        Optional<GemInfusingRecipe> match = entity.getWorld().getRecipeManager()
+                .getFirstMatch(GemInfusingRecipe.Type.INSTANCE, inventory, entity.getWorld());
 
-        return hasRawGemInFirstSlot && canInsertAmountIntoOutputSlot(inventory)
+        return match.isPresent() && canInsertAmountIntoOutputSlot(inventory)
                 && canInsertItemIntoOutputSlot(inventory, ModItems.TANZANITE);
     }
 
