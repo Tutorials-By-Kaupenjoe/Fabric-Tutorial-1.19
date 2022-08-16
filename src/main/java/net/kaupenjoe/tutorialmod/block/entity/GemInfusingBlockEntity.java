@@ -134,7 +134,7 @@ public class GemInfusingBlockEntity extends BlockEntity implements NamedScreenHa
                 .getFirstMatch(GemInfusingRecipe.Type.INSTANCE, inventory, entity.getWorld());
 
         return match.isPresent() && canInsertAmountIntoOutputSlot(inventory)
-                && canInsertItemIntoOutputSlot(inventory, ModItems.TANZANITE);
+                && canInsertItemIntoOutputSlot(inventory, match.get().getOutput().getItem());
     }
 
     private static boolean canInsertItemIntoOutputSlot(SimpleInventory inventory, Item output) {
