@@ -1,2 +1,6 @@
 Paintings by PlatinumG17 (https://creativecommons.org/licenses/by-sa/4.0/):
 https://www.curseforge.com/members/platinumg17/projects
+
+EnergyInfoArea & InfoArea (FORGE) from BluSunrize:
+https://github.com/BluSunrize/ImmersiveEngineering Under Blu's License of Common Sense:
+https://github.com/BluSunrize/ImmersiveEngineering/blob/1.18.2/LICENSE
