@@ -4,8 +4,11 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
+import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.kaupenjoe.tutorialmod.block.ModBlocks;
+import net.kaupenjoe.tutorialmod.block.entity.ModBlockEntities;
+import net.kaupenjoe.tutorialmod.block.entity.client.GemInfusingStationBlockEntityRenderer;
 import net.kaupenjoe.tutorialmod.client.ThirstHudOverlay;
 import net.kaupenjoe.tutorialmod.event.KeyInputHandler;
 import net.kaupenjoe.tutorialmod.fluid.ModFluids;
@@ -37,5 +40,7 @@ public class TutorialModClient implements ClientModInitializer {
                 ModFluids.STILL_SOAP_WATER, ModFluids.FLOWING_SOAP_WATER);
 
         HandledScreens.register(ModScreenHandlers.GEM_INFUSING_SCREEN_HANDLER, GemInfusingScreen::new);
+
+        BlockEntityRendererRegistry.register(ModBlockEntities.GEM_INFUSING_STATION, GemInfusingStationBlockEntityRenderer::new);
     }
 }

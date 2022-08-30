@@ -45,6 +45,38 @@ import java.util.Optional;
 public class GemInfusingBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, ImplementedInventory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(3, ItemStack.EMPTY);
 
+    public ItemStack getRenderStack() {
+        if(this.getStack(2).isEmpty()) {
+            return this.getStack(1);
+        } else {
+            return this.getStack(2);
+        }
+    }
+
+    public void setInventory(DefaultedList<ItemStack> inventory) {
+        for (int i = 0; i < inventory.size(); i++) {
+            this.inventory.set(i, inventory.get(i));
+        }
+    }
+
+    @Override
+    public void markDirty() {
+        if(!world.isClient()) {
+            PacketByteBuf data = PacketByteBufs.create();
+            data.writeInt(inventory.size());
+            for(int i = 0; i < inventory.size(); i++) {
+                data.writeItemStack(inventory.get(i));
+            }
+            data.writeBlockPos(getPos());
+
+            for (ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) world, getPos())) {
+                ServerPlayNetworking.send(player, ModMessages.ITEM_SYNC, data);
+            }
+        }
+
+        super.markDirty();
+    }
+
     public final SimpleEnergyStorage energyStorage = new SimpleEnergyStorage(30000, 32, 32) {
         @Override
         protected void onFinalCommit() {

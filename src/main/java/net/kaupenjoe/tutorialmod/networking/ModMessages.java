@@ -13,6 +13,7 @@ public class ModMessages {
 
     public static final Identifier ENERGY_SYNC = new Identifier(TutorialMod.MOD_ID, "energy_sync");
     public static final Identifier FLUID_SYNC = new Identifier(TutorialMod.MOD_ID, "fluid_sync");
+    public static final Identifier ITEM_SYNC = new Identifier(TutorialMod.MOD_ID, "item_sync");
 
     public static void registerC2SPackets() {
         ServerPlayNetworking.registerGlobalReceiver(EXAMPLE_ID, ExampleC2SPacket::receive);
@@ -23,5 +24,6 @@ public class ModMessages {
         ClientPlayNetworking.registerGlobalReceiver(THIRST_SYNC_ID, ThirstSyncDataS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(ENERGY_SYNC, EnergySyncS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(FLUID_SYNC, FluidSyncS2CPacket::receive);
+        ClientPlayNetworking.registerGlobalReceiver(ITEM_SYNC, ItemStackSyncS2CPacket::receive);
     }
 }
