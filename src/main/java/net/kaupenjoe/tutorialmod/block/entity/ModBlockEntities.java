@@ -1,6 +1,7 @@
 package net.kaupenjoe.tutorialmod.block.entity;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.kaupenjoe.tutorialmod.TutorialMod;
 import net.kaupenjoe.tutorialmod.block.ModBlocks;
 import net.minecraft.block.entity.BlockEntityType;
@@ -18,5 +19,6 @@ public class ModBlockEntities {
                         ModBlocks.GEM_INFUSING_STATION).build(null));
 
         EnergyStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.energyStorage, GEM_INFUSING_STATION);
+        FluidStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.fluidStorage, GEM_INFUSING_STATION);
     }
 }

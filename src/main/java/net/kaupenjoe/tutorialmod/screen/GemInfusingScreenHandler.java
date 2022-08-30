@@ -2,6 +2,7 @@ package net.kaupenjoe.tutorialmod.screen;
 
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.kaupenjoe.tutorialmod.block.entity.GemInfusingBlockEntity;
+import net.kaupenjoe.tutorialmod.util.FluidStack;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -18,6 +19,7 @@ public class GemInfusingScreenHandler extends ScreenHandler {
     private final Inventory inventory;
     private final PropertyDelegate propertyDelegate;
     public final GemInfusingBlockEntity blockEntity;
+    public FluidStack fluidStack;
 
     public GemInfusingScreenHandler(int syncId, PlayerInventory inventory, PacketByteBuf buf) {
         this(syncId, inventory, inventory.player.getWorld().getBlockEntity(buf.readBlockPos()),
@@ -31,6 +33,7 @@ public class GemInfusingScreenHandler extends ScreenHandler {
         inventory.onOpen(playerInventory.player);
         this.propertyDelegate = delegate;
         this.blockEntity = (GemInfusingBlockEntity) entity;
+        this.fluidStack = new FluidStack(blockEntity.fluidStorage.variant, blockEntity.fluidStorage.amount);
 
         this.addSlot(new Slot(inventory, 0, 12, 15));
         this.addSlot(new Slot(inventory, 1, 86, 15));
@@ -40,6 +43,10 @@ public class GemInfusingScreenHandler extends ScreenHandler {
         addPlayerHotbar(playerInventory);
 
         addProperties(delegate);
+    }
+
+    public void setFluid(FluidStack stack) {
+        fluidStack = stack;
     }
 
     public boolean isCrafting() {

@@ -4,12 +4,18 @@ import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.kaupenjoe.tutorialmod.block.custom.GemInfusingStationBlock;
+import net.kaupenjoe.tutorialmod.fluid.ModFluids;
 import net.kaupenjoe.tutorialmod.item.ModItems;
 import net.kaupenjoe.tutorialmod.networking.ModMessages;
 import net.kaupenjoe.tutorialmod.recipe.GemInfusingRecipe;
 import net.kaupenjoe.tutorialmod.screen.GemInfusingScreenHandler;
+import net.kaupenjoe.tutorialmod.util.FluidStack;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,6 +24,7 @@ import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.NamedScreenHandlerFactory;
@@ -43,16 +50,51 @@ public class GemInfusingBlockEntity extends BlockEntity implements ExtendedScree
         protected void onFinalCommit() {
             markDirty();
             if(!world.isClient()) {
-                PacketByteBuf data = PacketByteBufs.create();
-                data.writeLong(amount);
-                data.writeBlockPos(getPos());
-
-                for(ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) world, getPos())) {
-                    ServerPlayNetworking.send(player, ModMessages.ENERGY_SYNC, data);
-                }
+                sendEnergyPacket();
             }
         }
     };
+
+    private void sendEnergyPacket() {
+        PacketByteBuf data = PacketByteBufs.create();
+        data.writeLong(energyStorage.amount);
+        data.writeBlockPos(getPos());
+
+        for(ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) world, getPos())) {
+            ServerPlayNetworking.send(player, ModMessages.ENERGY_SYNC, data);
+        }
+    }
+
+    public final SingleVariantStorage<FluidVariant> fluidStorage = new SingleVariantStorage<FluidVariant>() {
+        @Override
+        protected FluidVariant getBlankVariant() {
+            return FluidVariant.blank();
+        }
+
+        @Override
+        protected long getCapacity(FluidVariant variant) {
+            return FluidStack.convertDropletsToMb(FluidConstants.BUCKET) * 20; // 20k mB
+        }
+
+        @Override
+        protected void onFinalCommit() {
+            markDirty();
+            if(!world.isClient()) {
+                sendFluidPacket();
+            }
+        }
+    };
+
+    private void sendFluidPacket() {
+        PacketByteBuf data = PacketByteBufs.create();
+        fluidStorage.variant.toPacket(data);
+        data.writeLong(fluidStorage.amount);
+        data.writeBlockPos(getPos());
+
+        for (ServerPlayerEntity player : PlayerLookup.tracking((ServerWorld) world, getPos())) {
+            ServerPlayNetworking.send(player, ModMessages.FLUID_SYNC, data);
+        }
+    }
 
     protected final PropertyDelegate propertyDelegate;
     private int progress = 0;
@@ -86,6 +128,11 @@ public class GemInfusingBlockEntity extends BlockEntity implements ExtendedScree
         this.energyStorage.amount = energyLevel;
     }
 
+    public void setFluidLevel(FluidVariant fluidVariant, long fluidLevel) {
+        this.fluidStorage.variant = fluidVariant;
+        this.fluidStorage.amount = fluidLevel;
+    }
+
     @Override
     public DefaultedList<ItemStack> getItems() {
         return this.inventory;
@@ -99,6 +146,9 @@ public class GemInfusingBlockEntity extends BlockEntity implements ExtendedScree
     @Nullable
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
+        sendEnergyPacket();
+        sendFluidPacket();
+
         return new GemInfusingScreenHandler(syncId, inv, this, this.propertyDelegate);
     }
 
@@ -113,6 +163,8 @@ public class GemInfusingBlockEntity extends BlockEntity implements ExtendedScree
         Inventories.writeNbt(nbt, inventory);
         nbt.putInt("gem_infusing_station.progress", progress);
         nbt.putLong("gem_infusing_station.energy", energyStorage.amount);
+        nbt.put("gem_infusing_station.variant", fluidStorage.variant.toNbt());
+        nbt.putLong("gem_infusing_station.fluid", fluidStorage.amount);
     }
 
     @Override
@@ -121,6 +173,8 @@ public class GemInfusingBlockEntity extends BlockEntity implements ExtendedScree
         super.readNbt(nbt);
         progress = nbt.getInt("gem_infusing_station.progress");
         energyStorage.amount = nbt.getLong("gem_infusing_station.energy");
+        fluidStorage.variant = FluidVariant.fromNbt((NbtCompound) nbt.get("gem_infusing_station.variant"));
+        fluidStorage.amount = nbt.getLong("gem_infusing_station.fluid");
     }
 
     private void resetProgress() {
@@ -197,17 +251,47 @@ public class GemInfusingBlockEntity extends BlockEntity implements ExtendedScree
             }
         }
 
-        if(hasRecipe(entity) && hasEnoughEnergy(entity)) {
+        if(hasRecipe(entity) && hasEnoughEnergy(entity) && hasEnoughFluid(entity)) {
             entity.progress++;
             extractEnergy(entity);
             markDirty(world, blockPos, state);
             if(entity.progress >= entity.maxProgress) {
                 craftItem(entity);
+                extractFluid(entity);
             }
         } else {
             entity.resetProgress();
             markDirty(world, blockPos, state);
         }
+
+        if(hasFluidSourceInSlot(entity)) {
+            transferFluidToFluidStorage(entity);
+        }
+    }
+
+    private static void extractFluid(GemInfusingBlockEntity entity) {
+        try(Transaction transaction = Transaction.openOuter()) {
+            entity.fluidStorage.extract(FluidVariant.of(ModFluids.STILL_SOAP_WATER),
+                    500, transaction);
+            transaction.commit();
+        }
+    }
+
+    private static void transferFluidToFluidStorage(GemInfusingBlockEntity entity) {
+        try(Transaction transaction = Transaction.openOuter()) {
+            entity.fluidStorage.insert(FluidVariant.of(ModFluids.STILL_SOAP_WATER),
+                    FluidStack.convertDropletsToMb(FluidConstants.BUCKET), transaction);
+            transaction.commit();
+            entity.setStack(0, new ItemStack(Items.BUCKET));
+        }
+    }
+
+    private static boolean hasFluidSourceInSlot(GemInfusingBlockEntity entity) {
+        return entity.getStack(0).getItem() == ModFluids.SOAP_WATER_BUCKET;
+    }
+
+    private static boolean hasEnoughFluid(GemInfusingBlockEntity entity) {
+        return entity.fluidStorage.amount >= 500; // mB amount!
     }
 
     private static void extractEnergy(GemInfusingBlockEntity entity) {

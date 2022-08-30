@@ -16,6 +16,7 @@
   "block.tutorialmod.tanzanite_lamp": "Tanzanite Lamp",
   "block.tutorialmod.eggplant_crop": "Eggplant Crop",
   "block.tutorialmod.gem_infusing_station": "Gem Infusing Station",
+  "block.tutorialmod.soap_water": "Soap Water",
 
 
   "itemGroup.tutorialmod.tanzanite": "Tanzanite Tutorial Tab",
@@ -26,5 +27,8 @@
   "key.tutorialmod.drink_water": "Drink Water Key",
 
   "message.tutorialmod.drank_water": "Drank Water!",
-  "message.tutorialmod.no_water": "No Water around!"
+  "message.tutorialmod.no_water": "No Water around!",
+
+  "tutorialmod.tooltip.liquid.amount.with.capacity": "%s / %s mB",
+  "tutorialmod.tooltip.liquid.amount": "%s mB"
 }
