@@ -299,7 +299,7 @@ public class GemInfusingBlockEntity extends BlockEntity implements ExtendedScree
         if(hasFluidSourceInSlot(entity)) {
             
             
-            FluidToFluidStorage(entity);
+            transferFluidToFluidStorage(entity);
         }
     }
 
