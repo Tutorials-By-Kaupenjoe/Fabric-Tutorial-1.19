@@ -306,7 +306,7 @@ public class GemInfusingBlockEntity extends BlockEntity implements ExtendedScree
         private static void extractFluid(GemInfusingBlockEntity entity) {
         try (Transaction transaction = Transaction.openOuter()) {
             entity.fluidStorage.extract(FluidVariant.of(entity.fluidStorage.variant.getFluid()),
-                    getMaxFluidAmountFromBlockAndItem(entity, entity.getStack(1).getItem()), transaction);
+                    500, transaction);
             transaction.commit();
         }
     }
