@@ -2,8 +2,11 @@ package net.kaupenjoe.tutorialmod;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.kaupenjoe.tutorialmod.block.ModBlocks;
 import net.kaupenjoe.tutorialmod.block.entity.ModBlockEntities;
+import net.kaupenjoe.tutorialmod.entity.ModEntities;
+import net.kaupenjoe.tutorialmod.entity.custom.ChomperEntity;
 import net.kaupenjoe.tutorialmod.event.PlayerTickHandler;
 import net.kaupenjoe.tutorialmod.fluid.ModFluids;
 import net.kaupenjoe.tutorialmod.item.ModItems;
@@ -17,6 +20,7 @@ import net.kaupenjoe.tutorialmod.world.feature.ModConfiguredFeatures;
 import net.kaupenjoe.tutorialmod.world.gen.ModOreGeneration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import software.bernie.geckolib3.GeckoLib;
 
 // Very important comment
 public class TutorialMod implements ModInitializer {
@@ -44,6 +48,10 @@ public class TutorialMod implements ModInitializer {
 
 		ModScreenHandlers.registerAllScreenHandlers();
 		ModRecipes.registerRecipes();
+
+		GeckoLib.initialize();
+
+		FabricDefaultAttributeRegistry.register(ModEntities.CHOMPER, ChomperEntity.setAttributes());
 
 		ServerTickEvents.START_SERVER_TICK.register(new PlayerTickHandler());
 	}

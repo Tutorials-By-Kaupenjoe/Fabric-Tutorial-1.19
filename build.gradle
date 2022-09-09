@@ -23,6 +23,8 @@ repositories {
 			includeGroup "curse.maven"
 		}
 	}
+
+	maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
 }
 
 dependencies {
@@ -40,6 +42,8 @@ dependencies {
 
 	modImplementation  ("curse.maven:reborncore-237903:3902448")
 	modImplementation  ("curse.maven:techreborn-233564:3902447")
+
+	modImplementation 'software.bernie.geckolib:geckolib-fabric-1.19:3.1.18'
 
 	// Uncomment the following line to enable the deprecated Fabric API modules.
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.

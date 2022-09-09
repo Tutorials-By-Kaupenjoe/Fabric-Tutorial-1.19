@@ -3,6 +3,7 @@ package net.kaupenjoe.tutorialmod.item;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.kaupenjoe.tutorialmod.TutorialMod;
 import net.kaupenjoe.tutorialmod.block.ModBlocks;
+import net.kaupenjoe.tutorialmod.entity.ModEntities;
 import net.kaupenjoe.tutorialmod.item.custom.EightBallItem;
 import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
@@ -26,6 +27,11 @@ public class ModItems {
     public static final Item KAUPENSWORD = registerItem("kaupensword",
             new SwordItem(ToolMaterials.DIAMOND, 10, 5f,
                     new FabricItemSettings().group(ModItemGroup.TANZANITE).maxCount(1)));
+
+    public static final Item CHOMPER_SPAWN_EGG = registerItem("chomper_spawn_egg",
+            new SpawnEggItem(ModEntities.CHOMPER,0x22b341, 0x19732e,
+                    new FabricItemSettings().group(ModItemGroup.TANZANITE)));
+
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registry.ITEM, new Identifier(TutorialMod.MOD_ID, name), item);
