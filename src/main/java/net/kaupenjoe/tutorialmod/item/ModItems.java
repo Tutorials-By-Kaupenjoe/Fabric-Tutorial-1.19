@@ -32,6 +32,9 @@ public class ModItems {
             new SpawnEggItem(ModEntities.CHOMPER,0x22b341, 0x19732e,
                     new FabricItemSettings().group(ModItemGroup.TANZANITE)));
 
+    public static final Item TANZANITE_PICKAXE = registerItem("tanzanite_pickaxe",
+            new PickaxeItem(ModToolMaterial.TANZANITE, 4, 2f,
+                    new FabricItemSettings().group(ModItemGroup.TANZANITE).maxCount(1)));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registry.ITEM, new Identifier(TutorialMod.MOD_ID, name), item);
