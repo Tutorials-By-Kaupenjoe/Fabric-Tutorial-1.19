@@ -10,6 +10,8 @@ import net.kaupenjoe.tutorialmod.block.custom.TanzaniteLampBlock;
 import net.kaupenjoe.tutorialmod.item.ModItemGroup;
 import net.kaupenjoe.tutorialmod.world.feature.tree.DogwoodSaplingGenerator;
 import net.minecraft.block.*;
+import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -66,6 +68,12 @@ public class ModBlocks {
             new SaplingBlock(new DogwoodSaplingGenerator(),
                     FabricBlockSettings.copy(Blocks.OAK_SAPLING)), ModItemGroup.TANZANITE);
 
+    public static final Block BUTTERCUPS = registerBlock("buttercups",
+            new FlowerBlock(StatusEffects.HASTE, 8,
+                    FabricBlockSettings.copy(Blocks.DANDELION)), ModItemGroup.TANZANITE);
+
+    public static final Block POTTED_BUTTERCUPS = registerBlockWithoutItem("potted_buttercups",
+            new FlowerPotBlock(ModBlocks.BUTTERCUPS, FabricBlockSettings.copy(Blocks.POTTED_DANDELION)));
 
     private static Block registerBlockWithoutItem(String name, Block block) {
         return Registry.register(Registry.BLOCK, new Identifier(TutorialMod.MOD_ID, name), block);

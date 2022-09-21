@@ -36,6 +36,13 @@ public class ModPlacedFeatures {
 
 
 
+    public static final RegistryEntry<PlacedFeature> BUTTERCUPS = PlacedFeatures.register("buttercups_placed",
+            ModConfiguredFeatures.BUTTERCUPS, RarityFilterPlacementModifier.of(4), SquarePlacementModifier.of(),
+            PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of());
+
+
+
+
     private static List<PlacementModifier> modifiers(PlacementModifier countModifier, PlacementModifier heightModifier) {
         return List.of(countModifier, SquarePlacementModifier.of(), heightModifier, BiomePlacementModifier.of());
     }

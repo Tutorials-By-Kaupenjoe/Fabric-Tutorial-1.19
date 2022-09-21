@@ -72,6 +72,12 @@ public class ModConfiguredFeatures {
                             -18, 18, 0.075D, 1));
 
 
+    public static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> BUTTERCUPS =
+            ConfiguredFeatures.register("flower_buttercups", Feature.FLOWER,
+                    ConfiguredFeatures.createRandomPatchFeatureConfig(64, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK,
+                            new SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.BUTTERCUPS)))));
+
+
 
     public static void registerConfiguredFeatures() {
         TutorialMod.LOGGER.debug("Registering the ModConfiguredFeatures for " + TutorialMod.MOD_ID);
