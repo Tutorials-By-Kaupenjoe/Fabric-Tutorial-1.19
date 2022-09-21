@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+    "all": "tutorialmod:block/dogwood_leaves"
+  }
+}

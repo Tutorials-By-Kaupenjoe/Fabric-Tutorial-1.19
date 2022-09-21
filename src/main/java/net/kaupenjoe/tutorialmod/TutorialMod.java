@@ -16,10 +16,13 @@ import net.kaupenjoe.tutorialmod.networking.ModMessages;
 import net.kaupenjoe.tutorialmod.painting.ModPaintings;
 import net.kaupenjoe.tutorialmod.recipe.ModRecipes;
 import net.kaupenjoe.tutorialmod.screen.ModScreenHandlers;
+import net.kaupenjoe.tutorialmod.util.ModFlammableBlocks;
 import net.kaupenjoe.tutorialmod.util.ModLootTableModifiers;
+import net.kaupenjoe.tutorialmod.util.ModStrippableBlocks;
 import net.kaupenjoe.tutorialmod.villager.ModVillagers;
 import net.kaupenjoe.tutorialmod.world.feature.ModConfiguredFeatures;
 import net.kaupenjoe.tutorialmod.world.gen.ModOreGeneration;
+import net.kaupenjoe.tutorialmod.world.gen.ModWorldGen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.bernie.geckolib3.GeckoLib;
@@ -40,7 +43,7 @@ public class TutorialMod implements ModInitializer {
 		ModVillagers.registerTrades();
 
 		ModPaintings.registerPaintings();
-		ModOreGeneration.generateOres();
+		ModWorldGen.generateWorldGen();
 
 		ModLootTableModifiers.modifyLootTables();
 		ModMessages.registerC2SPackets();
@@ -50,6 +53,9 @@ public class TutorialMod implements ModInitializer {
 
 		ModScreenHandlers.registerAllScreenHandlers();
 		ModRecipes.registerRecipes();
+
+		ModFlammableBlocks.registerFlammableBlocks();
+		ModStrippableBlocks.registerStrippables();
 
 		GeckoLib.initialize();
 

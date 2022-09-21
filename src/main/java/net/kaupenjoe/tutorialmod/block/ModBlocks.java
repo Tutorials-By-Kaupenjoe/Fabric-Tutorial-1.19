@@ -8,10 +8,8 @@ import net.kaupenjoe.tutorialmod.block.custom.GemInfusingStationBlock;
 import net.kaupenjoe.tutorialmod.block.custom.JumpyBlock;
 import net.kaupenjoe.tutorialmod.block.custom.TanzaniteLampBlock;
 import net.kaupenjoe.tutorialmod.item.ModItemGroup;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.Material;
-import net.minecraft.block.OreBlock;
+import net.kaupenjoe.tutorialmod.world.feature.tree.DogwoodSaplingGenerator;
+import net.minecraft.block.*;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -49,6 +47,24 @@ public class ModBlocks {
     public static final Block GEM_INFUSING_STATION = registerBlock("gem_infusing_station",
             new GemInfusingStationBlock(FabricBlockSettings.of(Material.METAL)
                     .strength(4f).requiresTool().nonOpaque()), ModItemGroup.TANZANITE);
+
+    public static final Block DOGWOOD_LOG = registerBlock("dogwood_log",
+            new PillarBlock(FabricBlockSettings.copy(Blocks.OAK_LOG)), ModItemGroup.TANZANITE);
+    public static final Block DOGWOOD_WOOD = registerBlock("dogwood_wood",
+            new PillarBlock(FabricBlockSettings.copy(Blocks.OAK_WOOD)), ModItemGroup.TANZANITE);
+    public static final Block STRIPPED_DOGWOOD_LOG = registerBlock("stripped_dogwood_log",
+            new PillarBlock(FabricBlockSettings.copy(Blocks.STRIPPED_OAK_LOG)), ModItemGroup.TANZANITE);
+    public static final Block STRIPPED_DOGWOOD_WOOD = registerBlock("stripped_dogwood_wood",
+            new PillarBlock(FabricBlockSettings.copy(Blocks.STRIPPED_OAK_WOOD)), ModItemGroup.TANZANITE);
+
+    public static final Block DOGWOOD_PLANKS = registerBlock("dogwood_planks",
+            new Block(FabricBlockSettings.copy(Blocks.OAK_PLANKS)), ModItemGroup.TANZANITE);
+    public static final Block DOGWOOD_LEAVES = registerBlock("dogwood_leaves",
+            new LeavesBlock(FabricBlockSettings.copy(Blocks.OAK_LEAVES)), ModItemGroup.TANZANITE);
+
+    public static final Block DOGWOOD_SAPLING = registerBlock("dogwood_sapling",
+            new SaplingBlock(new DogwoodSaplingGenerator(),
+                    FabricBlockSettings.copy(Blocks.OAK_SAPLING)), ModItemGroup.TANZANITE);
 
 
     private static Block registerBlockWithoutItem(String name, Block block) {

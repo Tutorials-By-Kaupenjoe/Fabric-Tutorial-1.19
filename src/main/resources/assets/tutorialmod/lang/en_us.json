@@ -20,6 +20,13 @@
   "block.tutorialmod.gem_infusing_station": "Gem Infusing Station",
   "block.tutorialmod.soap_water": "Soap Water",
 
+  "block.tutorialmod.dogwood_log": "Dogwood Log",
+  "block.tutorialmod.dogwood_wood": "Dogwood Wood",
+  "block.tutorialmod.stripped_dogwood_log": "Stripped Dogwood Log",
+  "block.tutorialmod.stripped_dogwood_wood": "Stripped Dogwood Wood",
+  "block.tutorialmod.dogwood_planks": "Dogwood Planks",
+  "block.tutorialmod.dogwood_leaves": "Dogwood Leaves",
+  "block.tutorialmod.dogwood_sapling": "Dogwood Sapling",
 
   "itemGroup.tutorialmod.tanzanite": "Tanzanite Tutorial Tab",
 

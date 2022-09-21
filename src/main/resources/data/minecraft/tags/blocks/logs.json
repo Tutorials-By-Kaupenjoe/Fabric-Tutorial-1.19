@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "tutorialmod:dogwood_log",
+    "tutorialmod:dogwood_wood",
+    "tutorialmod:stripped_dogwood_log",
+    "tutorialmod:stripped_dogwood_wood"
+  ]
+}
