@@ -28,6 +28,13 @@ public class ModPlacedFeatures {
             VegetationPlacedFeatures.modifiers(PlacedFeatures.createCountExtraModifier(1, 0.1f, 2)));
 
 
+    public static final RegistryEntry<PlacedFeature> TANZANITE_GEODE_PLACED = PlacedFeatures.register("tanzanite_geode_placed",
+            ModConfiguredFeatures.TANZANITE_GEODE, RarityFilterPlacementModifier.of(42),
+            SquarePlacementModifier.of(),
+            HeightRangePlacementModifier.uniform(YOffset.aboveBottom(6), YOffset.aboveBottom(50)),
+            BiomePlacementModifier.of());
+
+
 
     private static List<PlacementModifier> modifiers(PlacementModifier countModifier, PlacementModifier heightModifier) {
         return List.of(countModifier, SquarePlacementModifier.of(), heightModifier, BiomePlacementModifier.of());
