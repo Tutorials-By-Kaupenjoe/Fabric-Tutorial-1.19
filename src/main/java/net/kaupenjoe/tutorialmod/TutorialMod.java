@@ -23,6 +23,7 @@ import net.kaupenjoe.tutorialmod.villager.ModVillagers;
 import net.kaupenjoe.tutorialmod.world.feature.ModConfiguredFeatures;
 import net.kaupenjoe.tutorialmod.world.gen.ModOreGeneration;
 import net.kaupenjoe.tutorialmod.world.gen.ModWorldGen;
+import net.kaupenjoe.tutorialmod.world.village.VillageAdditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.bernie.geckolib3.GeckoLib;
@@ -60,6 +61,7 @@ public class TutorialMod implements ModInitializer {
 		GeckoLib.initialize();
 
 		FabricDefaultAttributeRegistry.register(ModEntities.CHOMPER, ChomperEntity.setAttributes());
+		VillageAdditions.registerNewVillageStructures();
 
 		ServerTickEvents.START_SERVER_TICK.register(new PlayerTickHandler());
 		AttackEntityCallback.EVENT.register(new AttackEntityHandler());

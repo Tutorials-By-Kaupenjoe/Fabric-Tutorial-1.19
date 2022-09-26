@@ -25,6 +25,13 @@ repositories {
 	}
 
 	maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
+	maven {
+		name = "Modrinth"
+		url = "https://api.modrinth.com/maven"
+		content {
+			includeGroup "maven.modrinth"
+		}
+	}
 }
 
 dependencies {
@@ -44,6 +51,9 @@ dependencies {
 	modImplementation  ("curse.maven:techreborn-233564:3902447")
 
 	modImplementation 'software.bernie.geckolib:geckolib-fabric-1.19:3.1.18'
+
+	modImplementation "maven.modrinth:Wd844r7Q:1.19-01"
+	include("maven.modrinth:Wd844r7Q:1.19-01")
 
 	// Uncomment the following line to enable the deprecated Fabric API modules.
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
