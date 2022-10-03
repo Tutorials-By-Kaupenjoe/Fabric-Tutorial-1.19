@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 300,
+  "experience": 3.0,
+  "group": "tanzanite",
+  "ingredient": {
+    "item": "tutorialmod:tanzanite_ore"
+  },
+  "result": "tutorialmod:tanzanite"
+}

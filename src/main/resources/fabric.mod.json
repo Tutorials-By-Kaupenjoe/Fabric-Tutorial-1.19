@@ -23,6 +23,9 @@
     ],
     "client": [
       "net.kaupenjoe.tutorialmod.TutorialModClient"
+    ],
+    "fabric-datagen": [
+      "net.kaupenjoe.tutorialmod.datagen.ModDataGeneration"
     ]
   },
   "mixins": [
