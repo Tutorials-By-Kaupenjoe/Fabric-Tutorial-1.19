@@ -15,7 +15,22 @@ public class ModModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
+        // Block Entity saga!
+        
         blockStateModelGenerator.registerCubeAllModelTexturePool(ModBlocks.JUMPY_BLOCK);
+    }
+    
+    private void registerGemInfusingStation(BlockStateModelGenerator generator)
+    {
+        blockStateModelGenerator.blockStateCollector.accept(
+            VariantsBlockStateSupplier.create(ModBlocks.GEM_INFUSING_STATION)
+                                      .register(Direction.NORTH, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.R0))
+                                      .register(Direction.WEST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.R270))
+                                      .register(Direction.EAST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.R90))
+                                      .register(Direction.SOUTH, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.R180)
+        );
+        
+        blockStateModelGenerator.registerItemModel(ModBlocks.GEM_INFUSING_STATION);
     }
 
     @Override
