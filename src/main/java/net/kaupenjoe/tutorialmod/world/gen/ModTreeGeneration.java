@@ -9,6 +9,6 @@ import net.minecraft.world.gen.GenerationStep;
 public class ModTreeGeneration {
     public static void generateTrees() {
         BiomeModifications.addFeature(BiomeSelectors.includeByKey(BiomeKeys.PLAINS),
-                GenerationStep.Feature.VEGETAL_DECORATION, ModPlacedFeatures.DOGWOOD_PLACED.getKey().get());
+                GenerationStep.Feature.VEGETAL_DECORATION, ModPlacedFeatures.DOGWOOD_PLACED_KEY);
     }
 }

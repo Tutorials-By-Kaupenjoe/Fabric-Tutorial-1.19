@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '0.12-SNAPSHOT'
+	id 'fabric-loom' version '1.0-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -43,17 +43,14 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	include modApi('teamreborn:energy:2.2.0') {
+	include modApi('teamreborn:energy:2.3.0') {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
 
-	modImplementation  ("curse.maven:reborncore-237903:3902448")
-	modImplementation  ("curse.maven:techreborn-233564:3902447")
+	modImplementation  ("curse.maven:reborncore-237903:4142164")
+	modImplementation  ("curse.maven:techreborn-233564:4142163")
 
-	modImplementation 'software.bernie.geckolib:geckolib-fabric-1.19:3.1.18'
-
-	modImplementation "maven.modrinth:Wd844r7Q:1.19-01"
-	include("maven.modrinth:Wd844r7Q:1.19-01")
+	modImplementation 'software.bernie.geckolib:geckolib-fabric-1.19.3:4.0.3'
 
 	// Uncomment the following line to enable the deprecated Fabric API modules.
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.

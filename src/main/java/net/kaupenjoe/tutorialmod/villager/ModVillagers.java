@@ -10,10 +10,11 @@ import net.kaupenjoe.tutorialmod.item.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.village.TradeOffer;
 import net.minecraft.village.VillagerProfession;
 import net.minecraft.world.poi.PointOfInterestType;
@@ -21,10 +22,10 @@ import net.minecraft.world.poi.PointOfInterestType;
 public class ModVillagers {
     public static final PointOfInterestType JUMPY_POI = registerPOI("jumpy_poi", ModBlocks.JUMPY_BLOCK);
     public static final VillagerProfession JUMP_MASTER = registerProfession("jumpmaster",
-            RegistryKey.of(Registry.POINT_OF_INTEREST_TYPE_KEY, new Identifier(TutorialMod.MOD_ID, "jumpy_poi")));
+            RegistryKey.of(Registries.POINT_OF_INTEREST_TYPE.getKey(), new Identifier(TutorialMod.MOD_ID, "jumpy_poi")));
 
     public static VillagerProfession registerProfession(String name, RegistryKey<PointOfInterestType> type) {
-        return Registry.register(Registry.VILLAGER_PROFESSION, new Identifier(TutorialMod.MOD_ID, name),
+        return Registry.register(Registries.VILLAGER_PROFESSION, new Identifier(TutorialMod.MOD_ID, name),
                 VillagerProfessionBuilder.create().id(new Identifier(TutorialMod.MOD_ID, name)).workstation(type)
                         .workSound(SoundEvents.ENTITY_VILLAGER_WORK_ARMORER).build());
     }

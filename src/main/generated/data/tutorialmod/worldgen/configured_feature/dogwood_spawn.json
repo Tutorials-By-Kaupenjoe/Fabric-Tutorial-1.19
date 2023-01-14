@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "default": "tutorialmod:dogwood_placed",
+    "features": [
+      {
+        "chance": 0.5,
+        "feature": "tutorialmod:dogwood_placed"
+      }
+    ]
+  }
+}

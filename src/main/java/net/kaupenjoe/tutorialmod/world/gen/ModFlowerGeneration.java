@@ -9,6 +9,6 @@ import net.minecraft.world.gen.GenerationStep;
 public class ModFlowerGeneration {
     public static void generateFlowers() {
         BiomeModifications.addFeature(BiomeSelectors.includeByKey(BiomeKeys.PLAINS),
-                GenerationStep.Feature.VEGETAL_DECORATION, ModPlacedFeatures.BUTTERCUPS.getKey().get());
+                GenerationStep.Feature.VEGETAL_DECORATION, ModPlacedFeatures.BUTTERCUPS_PLACED_KEY);
     }
 }

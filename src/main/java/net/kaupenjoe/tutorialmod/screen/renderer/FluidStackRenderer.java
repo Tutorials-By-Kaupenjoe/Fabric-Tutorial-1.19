@@ -13,12 +13,12 @@ import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.registry.Registries;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.registry.Registry;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -78,7 +78,7 @@ public class FluidStackRenderer implements IIngredientRenderer<FluidStack> {
         int color = FluidVariantRendering.getColor(fluid.getFluidVariant());
 
         final int drawHeight = (int) (fluid.getAmount() / (maxCapacity * 1F) * height);
-        final int iconHeight = sprite.getHeight();
+        final int iconHeight = sprite.getY();
         int offsetHeight = drawHeight;
 
         RenderSystem.setShaderColor((color >> 16 & 255) / 255.0F, (float) (color >> 8 & 255) / 255.0F, (float) (color & 255) / 255.0F, 1F);
@@ -97,7 +97,7 @@ public class FluidStackRenderer implements IIngredientRenderer<FluidStack> {
         RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
 
         RenderSystem.setShaderTexture(0, FluidRenderHandlerRegistry.INSTANCE.get(fluid.getFluidVariant().getFluid())
-                .getFluidSprites(MinecraftClient.getInstance().world, null, fluid.getFluidVariant().getFluid().getDefaultState())[0].getId());
+                .getFluidSprites(MinecraftClient.getInstance().world, null, fluid.getFluidVariant().getFluid().getDefaultState())[0].getAtlasId());
     }
 
     @Override
@@ -108,7 +108,7 @@ public class FluidStackRenderer implements IIngredientRenderer<FluidStack> {
             return tooltip;
         }
 
-        MutableText displayName = Text.translatable("block." + Registry.FLUID.getId(fluidStack.fluidVariant.getFluid()).toTranslationKey());
+        MutableText displayName = Text.translatable("block." + Registries.FLUID.getId(fluidStack.fluidVariant.getFluid()).toTranslationKey());
         tooltip.add(displayName);
 
         long amount = fluidStack.getAmount();

@@ -2,8 +2,9 @@ package net.kaupenjoe.tutorialmod.painting;
 
 import net.kaupenjoe.tutorialmod.TutorialMod;
 import net.minecraft.entity.decoration.painting.PaintingVariant;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 public class ModPaintings {
     public static final PaintingVariant SUNSET = registerPainting("sunset", new PaintingVariant(32, 16));
@@ -12,7 +13,7 @@ public class ModPaintings {
 
 
     private static PaintingVariant registerPainting(String name, PaintingVariant paintingVariant) {
-        return Registry.register(Registry.PAINTING_VARIANT, new Identifier(TutorialMod.MOD_ID, name), paintingVariant);
+        return Registry.register(Registries.PAINTING_VARIANT, new Identifier(TutorialMod.MOD_ID, name), paintingVariant);
     }
 
     public static void registerPaintings() {

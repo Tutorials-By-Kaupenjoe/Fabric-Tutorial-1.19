@@ -1,5 +1,6 @@
 {
   "type": "minecraft:smelting",
+  "category": "misc",
   "cookingtime": 300,
   "experience": 3.0,
   "group": "tanzanite",

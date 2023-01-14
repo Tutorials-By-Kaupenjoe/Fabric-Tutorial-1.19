@@ -29,7 +29,7 @@ public class ThirstHudOverlay implements HudRenderCallback {
             y = height;
         }
 
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShader(GameRenderer::getPositionTexProgram);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, EMPTY_THIRST);
         for(int i = 0; i < 10; i++) {

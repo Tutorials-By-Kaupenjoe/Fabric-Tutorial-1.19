@@ -13,7 +13,7 @@ public class ExampleC2SPacket {
     public static void receive(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
                                PacketByteBuf buf, PacketSender responseSender) {
         // Everything here happens ONLY on the Server!
-        EntityType.COW.spawn(((ServerWorld) player.world), null, null, player, player.getBlockPos(),
-                SpawnReason.TRIGGERED, true, false);
+        // EntityType.COW.spawn(((ServerWorld) player.world), null, null, player, player.getBlockPos(),
+        //         SpawnReason.TRIGGERED, true, false);
     }
 }

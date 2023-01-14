@@ -13,7 +13,7 @@ import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3f;
+import net.minecraft.util.math.RotationAxis;
 import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 
@@ -31,13 +31,13 @@ public class GemInfusingStationBlockEntityRenderer implements BlockEntityRendere
         matrices.push();
         matrices.translate(0.5f, 0.645f, 0.5f);
         matrices.scale(0.2f, 0.2f, 0.2f);
-        matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(-90));
+        matrices.multiply(RotationAxis.POSITIVE_X.rotation(-90));
 
         switch (entity.getCachedState().get(GemInfusingStationBlock.FACING)) {
-            case NORTH -> matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(180));
-            case EAST -> matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(270));
-            case SOUTH -> matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(0));
-            case WEST -> matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(90));
+            case NORTH -> matrices.multiply(RotationAxis.POSITIVE_Z.rotation(180));
+            case EAST -> matrices.multiply(RotationAxis.POSITIVE_Z.rotation(270));
+            case SOUTH -> matrices.multiply(RotationAxis.POSITIVE_Z.rotation(0));
+            case WEST -> matrices.multiply(RotationAxis.POSITIVE_Z.rotation(90));
         }
 
         itemRenderer.renderItem(itemStack, ModelTransformation.Mode.GUI, getLightLevel(entity.getWorld(), entity.getPos()),

@@ -58,14 +58,14 @@ public class GemInfusingScreen extends HandledScreen<GemInfusingScreenHandler> {
     private void renderFluidTooltip(MatrixStack matrices, int mouseX, int mouseY, int x, int y,
                                     FluidStack fluidStack, int offsetX, int offsetY, FluidStackRenderer renderer) {
         if(isMouseAboveArea(mouseX, mouseY, x, y, offsetX, offsetY, renderer)) {
-            renderTooltip(matrices, renderer.getTooltip(fluidStack, TooltipContext.Default.NORMAL),
+            renderTooltip(matrices, renderer.getTooltip(fluidStack, TooltipContext.Default.BASIC),
                     Optional.empty(), mouseX - x, mouseY - y);
         }
     }
 
     @Override
     protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShader(GameRenderer::getPositionTexProgram);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, TEXTURE);
         int x = (width - backgroundWidth) / 2;

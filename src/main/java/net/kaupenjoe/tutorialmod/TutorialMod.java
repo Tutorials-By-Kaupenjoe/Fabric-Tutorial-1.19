@@ -11,6 +11,7 @@ import net.kaupenjoe.tutorialmod.entity.custom.ChomperEntity;
 import net.kaupenjoe.tutorialmod.event.AttackEntityHandler;
 import net.kaupenjoe.tutorialmod.event.PlayerTickHandler;
 import net.kaupenjoe.tutorialmod.fluid.ModFluids;
+import net.kaupenjoe.tutorialmod.item.ModItemGroup;
 import net.kaupenjoe.tutorialmod.item.ModItems;
 import net.kaupenjoe.tutorialmod.networking.ModMessages;
 import net.kaupenjoe.tutorialmod.painting.ModPaintings;
@@ -21,12 +22,10 @@ import net.kaupenjoe.tutorialmod.util.ModLootTableModifiers;
 import net.kaupenjoe.tutorialmod.util.ModStrippableBlocks;
 import net.kaupenjoe.tutorialmod.villager.ModVillagers;
 import net.kaupenjoe.tutorialmod.world.feature.ModConfiguredFeatures;
-import net.kaupenjoe.tutorialmod.world.gen.ModOreGeneration;
 import net.kaupenjoe.tutorialmod.world.gen.ModWorldGen;
-import net.kaupenjoe.tutorialmod.world.village.VillageAdditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import software.bernie.geckolib3.GeckoLib;
+import software.bernie.geckolib.GeckoLib;
 
 // Very important comment
 public class TutorialMod implements ModInitializer {
@@ -35,7 +34,7 @@ public class TutorialMod implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		ModConfiguredFeatures.registerConfiguredFeatures();
+		ModItemGroup.registerItemGroup();
 
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
@@ -61,7 +60,7 @@ public class TutorialMod implements ModInitializer {
 		GeckoLib.initialize();
 
 		FabricDefaultAttributeRegistry.register(ModEntities.CHOMPER, ChomperEntity.setAttributes());
-		VillageAdditions.registerNewVillageStructures();
+		// VillageAdditions.registerNewVillageStructures();
 
 		ServerTickEvents.START_SERVER_TICK.register(new PlayerTickHandler());
 		AttackEntityCallback.EVENT.register(new AttackEntityHandler());
