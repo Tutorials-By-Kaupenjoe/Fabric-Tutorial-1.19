@@ -297,29 +297,41 @@ public class GemInfusingBlockEntity extends BlockEntity implements ExtendedScree
         }
 
         if(hasFluidSourceInSlot(entity)) {
+            
+            
             transferFluidToFluidStorage(entity);
         }
     }
 
-    private static void extractFluid(GemInfusingBlockEntity entity) {
-        try(Transaction transaction = Transaction.openOuter()) {
-            entity.fluidStorage.extract(FluidVariant.of(ModFluids.STILL_SOAP_WATER),
+        private static void extractFluid(GemInfusingBlockEntity entity) {
+        try (Transaction transaction = Transaction.openOuter()) {
+            entity.fluidStorage.extract(FluidVariant.of(entity.fluidStorage.variant.getFluid()),
                     500, transaction);
             transaction.commit();
         }
     }
 
+    private static boolean canInsertFluid(GemInfusingBlockEntity entity) {
+        return FluidVariant.of(((BucketItemAccessor) ((BucketItem) entity.getStack(0).getItem())).getFluid()).equals(entity.fluidStorage.variant) || entity.fluidStorage.variant.isBlank();
+    }
+
     private static void transferFluidToFluidStorage(GemInfusingBlockEntity entity) {
-        try(Transaction transaction = Transaction.openOuter()) {
-            entity.fluidStorage.insert(FluidVariant.of(ModFluids.STILL_SOAP_WATER),
-                    FluidStack.convertDropletsToMb(FluidConstants.BUCKET), transaction);
-            transaction.commit();
-            entity.setStack(0, new ItemStack(Items.BUCKET));
+        try (Transaction transaction = Transaction.openOuter()) {
+            if (!FluidVariant.of(((BucketItemAccessor) ((BucketItem) entity.getStack(0).getItem())).getFluid()).isBlank() && canInsertFluid(entity)) {
+                if (entity.fluidStorage.amount >= FluidStack.convertDropletsToMb(FluidConstants.BUCKET) * 50) {
+                    return;
+                } else {
+                    entity.fluidStorage.insert(FluidVariant.of(((BucketItemAccessor) ((BucketItem) entity.getStack(0).getItem())).getFluid()),
+                            FluidStack.convertDropletsToMb(FluidConstants.BUCKET), transaction);
+                    transaction.commit();
+                    entity.setStack(0, new ItemStack(Items.BUCKET));
+                }
+            }
         }
     }
 
     private static boolean hasFluidSourceInSlot(GemInfusingBlockEntity entity) {
-        return entity.getStack(0).getItem() == ModFluids.SOAP_WATER_BUCKET;
+        return entity.getStack(0).getItem() instanceof BucketItem;
     }
 
     private static boolean hasEnoughFluid(GemInfusingBlockEntity entity) {
