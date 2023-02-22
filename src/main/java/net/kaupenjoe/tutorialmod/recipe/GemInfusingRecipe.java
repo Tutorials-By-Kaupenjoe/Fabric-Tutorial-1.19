@@ -32,6 +32,15 @@ public class GemInfusingRecipe implements Recipe<SimpleInventory> {
     }
 
     @Override
+    public DefaultedList<Ingredient> getIngredients() {
+        DefaultedList<Ingredient> ingredients = DefaultedList.ofSize(2, Ingredient.EMPTY);
+        for (int i = 0; i < recipeItems.size(); i++) {
+            ingredients.set(i, Ingredient.ofStacks(recipeItems.get(i).getMatchingStacks()));
+        }
+        return ingredients;
+    }
+
+    @Override
     public ItemStack craft(SimpleInventory inventory) {
         return output;
     }
