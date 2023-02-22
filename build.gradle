@@ -32,6 +32,14 @@ repositories {
 			includeGroup "maven.modrinth"
 		}
 	}
+	maven {
+		url "https://maven.shedaniel.me/"
+		content {
+			includeGroup "me.shedaniel"
+			includeGroup "me.shedaniel.cloth"
+			includeGroup "dev.architectury"
+		}
+	}
 }
 
 dependencies {
@@ -54,6 +62,11 @@ dependencies {
 
 	modImplementation "maven.modrinth:Wd844r7Q:1.19-01"
 	include("maven.modrinth:Wd844r7Q:1.19-01")
+
+	modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}"
+	modLocalRuntime "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
+
+	modLocalRuntime "dev.architectury:architectury-fabric:${project.arch_version}"
 
 	// Uncomment the following line to enable the deprecated Fabric API modules.
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
