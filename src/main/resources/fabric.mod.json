@@ -26,6 +26,9 @@
     ],
     "fabric-datagen": [
       "net.kaupenjoe.tutorialmod.datagen.ModDataGeneration"
+    ],
+    "rei_client": [
+      "net.kaupenjoe.tutorialmod.api.rei.REIPlugin"
     ]
   },
   "mixins": [
