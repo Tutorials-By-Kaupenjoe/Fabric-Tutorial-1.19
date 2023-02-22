@@ -60,7 +60,7 @@ public class GemStationREICategory implements DisplayCategory<GemStationREIDispl
         int x = startPoint.x-14;
         int y = startPoint.y - 5;
         widgets.add(createInputSlot(display, 0, x, y));
-        widgets.add(createInputSlot(display, 1, x+SLOT_SIZE, y));
+        //widgets.add(createInputSlot(display, 1, x+SLOT_SIZE, y));
         //widgets.add(createInputSlot(display, 2, x, y+SLOT_SIZE));
         //widgets.add(createInputSlot(display, 3, x+SLOT_SIZE, y+SLOT_SIZE));
         return widgets;
