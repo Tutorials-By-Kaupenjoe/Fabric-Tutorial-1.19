@@ -31,6 +31,7 @@ public class GemInfusingRecipe implements Recipe<SimpleInventory> {
         return recipeItems.get(0).test(inventory.getStack(1));
     }
 
+    //For REI to get the Ingredients
     @Override
     public DefaultedList<Ingredient> getIngredients() {
         DefaultedList<Ingredient> ingredients = DefaultedList.ofSize(2, Ingredient.EMPTY);
